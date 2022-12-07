@@ -23,9 +23,21 @@ public class CourseController {
 
         return map;
     }
+
+
+
     @CrossOrigin(origins = "*")
     @GetMapping("/view")
     public List<Course> view(){
         return (List<Course>) dao.findAll();
     }
+    @PostMapping(path = "/search",produces = "application/json",consumes = "application/json")
+    public List<Course> Search(@RequestBody Course c){
+        String courseTitle = c.getCourseTitle();
+        System.out.println(courseTitle);
+        return(List<Course>) dao.Search(c.getCourseTitle());
+
+    }
+
+
 }
