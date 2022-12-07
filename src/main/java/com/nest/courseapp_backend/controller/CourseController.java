@@ -5,6 +5,7 @@ import com.nest.courseapp_backend.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -14,11 +15,13 @@ public class CourseController {
 
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/add",consumes = "application/json",produces = "application/json")
-    public String AddCourse(@RequestBody Course c){
+    public HashMap<String, String> AddCourse(@RequestBody Course c){
         System.out.println(c.getCourseTitle().toString());
         dao.save(c);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("status","success");
 
-        return "course added successffully";
+        return map;
     }
     @CrossOrigin(origins = "*")
     @GetMapping("/view")
